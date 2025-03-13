@@ -1,5 +1,15 @@
 local mapkey = require("util.keymapper").mapvimkey
 
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+
+vim.keymap.set({"n", "v"}, "<leader>d", "\"_d")
+
+vim.keymap.set("i","<C-R>", "<C-G>u<C-R>")
 -- Buffer Navigation
 mapkey("<leader>bn", "bnext", "n") -- Next buffer
 mapkey("<leader>bp", "bprevious", "n") -- Prev buffer
@@ -12,6 +22,7 @@ mapkey("<leader>e", "NvimTreeToggle", "n")
 
 -- Fuzzy Finder Navigation
 mapkey("<leader>fg", "FzfLua grep_project", "n")
+mapkey("<leader>ff", "FzfLua files", "n")
 mapkey("<leader>fb", "FzfLua buffers", "n")
 mapkey("<leader>fg", "FzfLua grep_project", "n")
 mapkey("<leader>fx", "FzfLua diagnostics_document", "n")
@@ -55,11 +66,5 @@ vim.keymap.set("v", ">", ">gv", { silent = true, noremap = true })
 local api = vim.api
 
 -- Comments
-
-if vim.env.TMUX ~= nil then
-	api.nvim_set_keymap("n", "<C-_>", "gtc", { noremap = false })
-	api.nvim_set_keymap("v", "<C-_>", "goc", { noremap = false })
-else
-	api.nvim_set_keymap("n", "<C-/>", "gtc", { noremap = false })
-	api.nvim_set_keymap("v", "<C-/>", "goc", { noremap = false })
-end
+vim.api.nvim_set_keymap("n", "<C-_>", "gtc", { noremap = false })
+vim.api.nvim_set_keymap("v", "<C-_>", "goc", { noremap = false })
